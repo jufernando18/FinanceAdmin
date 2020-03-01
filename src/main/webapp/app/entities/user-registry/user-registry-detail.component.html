@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="userRegistry">
+            <h2><span jhiTranslate="financeAdminApp.userRegistry.detail.title">User Registry</span> {{ userRegistry.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.name">Name</span></dt>
+                <dd>
+                    <span>{{ userRegistry.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.username">Username</span></dt>
+                <dd>
+                    <span>{{ userRegistry.username }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.password">Password</span></dt>
+                <dd>
+                    <span>{{ userRegistry.password }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.title">Title</span></dt>
+                <dd>
+                    <span>{{ userRegistry.title }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.token">Token</span></dt>
+                <dd>
+                    <span>{{ userRegistry.token }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.session">Session</span></dt>
+                <dd>
+                    <span>{{ userRegistry.session }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.createdAt">Created At</span></dt>
+                <dd>
+                    <span>{{ userRegistry.createdAt }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.updatedAt">Updated At</span></dt>
+                <dd>
+                    <span>{{ userRegistry.updatedAt }}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/user-registry', userRegistry.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

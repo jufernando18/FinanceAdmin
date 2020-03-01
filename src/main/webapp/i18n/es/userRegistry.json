@@ -1,0 +1,29 @@
+{
+  "financeAdminApp": {
+    "userRegistry": {
+      "home": {
+        "title": "User Registries",
+        "createLabel": "Crear nuevo User Registry",
+        "createOrEditLabel": "Crear o editar User Registry",
+        "notFound": "Ningún User Registries encontrado"
+      },
+      "created": "Un nuevo User Registry ha sido creado con el identificador {{ param }}",
+      "updated": "Un User Registry ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un User Registry ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar User Registry {{ id }}?"
+      },
+      "detail": {
+        "title": "User Registry"
+      },
+      "name": "Name",
+      "username": "Username",
+      "password": "Password",
+      "title": "Title",
+      "token": "Token",
+      "session": "Session",
+      "createdAt": "Created At",
+      "updatedAt": "Updated At"
+    }
+  }
+}
