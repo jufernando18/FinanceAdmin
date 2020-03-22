@@ -1,6 +1,5 @@
 package com.jferza.financeadmin.service.dto;
 
-import java.time.ZonedDateTime;
 import javax.validation.constraints.*;
 import java.io.Serializable;
 import java.util.Objects;
@@ -30,12 +29,6 @@ public class UserRegistryDTO implements Serializable {
 
     @NotNull
     private Boolean session;
-
-    @NotNull
-    private ZonedDateTime createdAt;
-
-    @NotNull
-    private ZonedDateTime updatedAt;
 
 
     public Long getId() {
@@ -94,22 +87,6 @@ public class UserRegistryDTO implements Serializable {
         this.session = session;
     }
 
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -141,8 +118,6 @@ public class UserRegistryDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", token='" + getToken() + "'" +
             ", session='" + isSession() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
     }
 }

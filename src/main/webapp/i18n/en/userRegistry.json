@@ -21,9 +21,7 @@
       "password": "Password",
       "title": "Title",
       "token": "Token",
-      "session": "Session",
-      "createdAt": "Created At",
-      "updatedAt": "Updated At"
+      "session": "Session"
     }
   }
 }

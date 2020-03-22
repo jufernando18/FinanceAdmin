@@ -22,13 +22,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.ZonedDateTime;
-import java.time.ZoneOffset;
-import java.time.ZoneId;
 import java.util.List;
 
-import static com.jferza.financeadmin.web.rest.TestUtil.sameInstant;
 import static com.jferza.financeadmin.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
@@ -58,12 +53,6 @@ public class UserRegistryResourceIT {
 
     private static final Boolean DEFAULT_SESSION = false;
     private static final Boolean UPDATED_SESSION = true;
-
-    private static final ZonedDateTime DEFAULT_CREATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_CREATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
-
-    private static final ZonedDateTime DEFAULT_UPDATED_AT = ZonedDateTime.ofInstant(Instant.ofEpochMilli(0L), ZoneOffset.UTC);
-    private static final ZonedDateTime UPDATED_UPDATED_AT = ZonedDateTime.now(ZoneId.systemDefault()).withNano(0);
 
     @Autowired
     private UserRegistryRepository userRegistryRepository;
@@ -118,9 +107,7 @@ public class UserRegistryResourceIT {
             .password(DEFAULT_PASSWORD)
             .title(DEFAULT_TITLE)
             .token(DEFAULT_TOKEN)
-            .session(DEFAULT_SESSION)
-            .createdAt(DEFAULT_CREATED_AT)
-            .updatedAt(DEFAULT_UPDATED_AT);
+            .session(DEFAULT_SESSION);
         return userRegistry;
     }
     /**
@@ -136,9 +123,7 @@ public class UserRegistryResourceIT {
             .password(UPDATED_PASSWORD)
             .title(UPDATED_TITLE)
             .token(UPDATED_TOKEN)
-            .session(UPDATED_SESSION)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT);
+            .session(UPDATED_SESSION);
         return userRegistry;
     }
 
@@ -169,8 +154,6 @@ public class UserRegistryResourceIT {
         assertThat(testUserRegistry.getTitle()).isEqualTo(DEFAULT_TITLE);
         assertThat(testUserRegistry.getToken()).isEqualTo(DEFAULT_TOKEN);
         assertThat(testUserRegistry.isSession()).isEqualTo(DEFAULT_SESSION);
-        assertThat(testUserRegistry.getCreatedAt()).isEqualTo(DEFAULT_CREATED_AT);
-        assertThat(testUserRegistry.getUpdatedAt()).isEqualTo(DEFAULT_UPDATED_AT);
     }
 
     @Test
@@ -291,44 +274,6 @@ public class UserRegistryResourceIT {
 
     @Test
     @Transactional
-    public void checkCreatedAtIsRequired() throws Exception {
-        int databaseSizeBeforeTest = userRegistryRepository.findAll().size();
-        // set the field null
-        userRegistry.setCreatedAt(null);
-
-        // Create the UserRegistry, which fails.
-        UserRegistryDTO userRegistryDTO = userRegistryMapper.toDto(userRegistry);
-
-        restUserRegistryMockMvc.perform(post("/api/user-registries")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(userRegistryDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<UserRegistry> userRegistryList = userRegistryRepository.findAll();
-        assertThat(userRegistryList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
-    public void checkUpdatedAtIsRequired() throws Exception {
-        int databaseSizeBeforeTest = userRegistryRepository.findAll().size();
-        // set the field null
-        userRegistry.setUpdatedAt(null);
-
-        // Create the UserRegistry, which fails.
-        UserRegistryDTO userRegistryDTO = userRegistryMapper.toDto(userRegistry);
-
-        restUserRegistryMockMvc.perform(post("/api/user-registries")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(userRegistryDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<UserRegistry> userRegistryList = userRegistryRepository.findAll();
-        assertThat(userRegistryList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllUserRegistries() throws Exception {
         // Initialize the database
         userRegistryRepository.saveAndFlush(userRegistry);
@@ -343,9 +288,7 @@ public class UserRegistryResourceIT {
             .andExpect(jsonPath("$.[*].password").value(hasItem(DEFAULT_PASSWORD)))
             .andExpect(jsonPath("$.[*].title").value(hasItem(DEFAULT_TITLE)))
             .andExpect(jsonPath("$.[*].token").value(hasItem(DEFAULT_TOKEN)))
-            .andExpect(jsonPath("$.[*].session").value(hasItem(DEFAULT_SESSION.booleanValue())))
-            .andExpect(jsonPath("$.[*].createdAt").value(hasItem(sameInstant(DEFAULT_CREATED_AT))))
-            .andExpect(jsonPath("$.[*].updatedAt").value(hasItem(sameInstant(DEFAULT_UPDATED_AT))));
+            .andExpect(jsonPath("$.[*].session").value(hasItem(DEFAULT_SESSION.booleanValue())));
     }
     
     @Test
@@ -364,9 +307,7 @@ public class UserRegistryResourceIT {
             .andExpect(jsonPath("$.password").value(DEFAULT_PASSWORD))
             .andExpect(jsonPath("$.title").value(DEFAULT_TITLE))
             .andExpect(jsonPath("$.token").value(DEFAULT_TOKEN))
-            .andExpect(jsonPath("$.session").value(DEFAULT_SESSION.booleanValue()))
-            .andExpect(jsonPath("$.createdAt").value(sameInstant(DEFAULT_CREATED_AT)))
-            .andExpect(jsonPath("$.updatedAt").value(sameInstant(DEFAULT_UPDATED_AT)));
+            .andExpect(jsonPath("$.session").value(DEFAULT_SESSION.booleanValue()));
     }
 
     @Test
@@ -395,9 +336,7 @@ public class UserRegistryResourceIT {
             .password(UPDATED_PASSWORD)
             .title(UPDATED_TITLE)
             .token(UPDATED_TOKEN)
-            .session(UPDATED_SESSION)
-            .createdAt(UPDATED_CREATED_AT)
-            .updatedAt(UPDATED_UPDATED_AT);
+            .session(UPDATED_SESSION);
         UserRegistryDTO userRegistryDTO = userRegistryMapper.toDto(updatedUserRegistry);
 
         restUserRegistryMockMvc.perform(put("/api/user-registries")
@@ -415,8 +354,6 @@ public class UserRegistryResourceIT {
         assertThat(testUserRegistry.getTitle()).isEqualTo(UPDATED_TITLE);
         assertThat(testUserRegistry.getToken()).isEqualTo(UPDATED_TOKEN);
         assertThat(testUserRegistry.isSession()).isEqualTo(UPDATED_SESSION);
-        assertThat(testUserRegistry.getCreatedAt()).isEqualTo(UPDATED_CREATED_AT);
-        assertThat(testUserRegistry.getUpdatedAt()).isEqualTo(UPDATED_UPDATED_AT);
     }
 
     @Test

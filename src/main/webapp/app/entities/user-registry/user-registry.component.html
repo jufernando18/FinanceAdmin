@@ -29,8 +29,6 @@
                     <th scope="col"  jhiSortBy="title"><span jhiTranslate="financeAdminApp.userRegistry.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="token"><span jhiTranslate="financeAdminApp.userRegistry.token">Token</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="session"><span jhiTranslate="financeAdminApp.userRegistry.session">Session</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="createdAt"><span jhiTranslate="financeAdminApp.userRegistry.createdAt">Created At</span> <fa-icon icon="sort"></fa-icon></th>
-                    <th scope="col"  jhiSortBy="updatedAt"><span jhiTranslate="financeAdminApp.userRegistry.updatedAt">Updated At</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -43,8 +41,6 @@
                     <td>{{ userRegistry.title }}</td>
                     <td>{{ userRegistry.token }}</td>
                     <td>{{ userRegistry.session }}</td>
-                    <td>{{ userRegistry.createdAt | date:'medium' }}</td>
-                    <td>{{ userRegistry.updatedAt | date:'medium' }}</td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -1,5 +1,3 @@
-import { Moment } from 'moment';
-
 export interface IUserRegistry {
   id?: number;
   name?: string;
@@ -8,8 +6,6 @@ export interface IUserRegistry {
   title?: string;
   token?: string;
   session?: boolean;
-  createdAt?: Moment;
-  updatedAt?: Moment;
 }
 
 export class UserRegistry implements IUserRegistry {
@@ -20,9 +16,7 @@ export class UserRegistry implements IUserRegistry {
     public password?: string,
     public title?: string,
     public token?: string,
-    public session?: boolean,
-    public createdAt?: Moment,
-    public updatedAt?: Moment
+    public session?: boolean
   ) {
     this.session = this.session || false;
   }

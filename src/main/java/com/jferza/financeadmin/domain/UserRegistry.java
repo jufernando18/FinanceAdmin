@@ -4,15 +4,12 @@ package com.jferza.financeadmin.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
-import java.io.Serializable;
-import java.time.ZonedDateTime;
-
 /**
  * A UserRegistry.
  */
 @Entity
 @Table(name = "user_registry")
-public class UserRegistry implements Serializable {
+public class UserRegistry  extends AbstractAuditingEntity {
 
     private static final long serialVersionUID = 1L;
 
@@ -44,14 +41,6 @@ public class UserRegistry implements Serializable {
     @NotNull
     @Column(name = "session", nullable = false)
     private Boolean session;
-
-    @NotNull
-    @Column(name = "created_at", nullable = false)
-    private ZonedDateTime createdAt;
-
-    @NotNull
-    @Column(name = "updated_at", nullable = false)
-    private ZonedDateTime updatedAt;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -139,32 +128,6 @@ public class UserRegistry implements Serializable {
     public void setSession(Boolean session) {
         this.session = session;
     }
-
-    public ZonedDateTime getCreatedAt() {
-        return createdAt;
-    }
-
-    public UserRegistry createdAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-        return this;
-    }
-
-    public void setCreatedAt(ZonedDateTime createdAt) {
-        this.createdAt = createdAt;
-    }
-
-    public ZonedDateTime getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public UserRegistry updatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-        return this;
-    }
-
-    public void setUpdatedAt(ZonedDateTime updatedAt) {
-        this.updatedAt = updatedAt;
-    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -193,8 +156,6 @@ public class UserRegistry implements Serializable {
             ", title='" + getTitle() + "'" +
             ", token='" + getToken() + "'" +
             ", session='" + isSession() + "'" +
-            ", createdAt='" + getCreatedAt() + "'" +
-            ", updatedAt='" + getUpdatedAt() + "'" +
             "}";
     }
 }
