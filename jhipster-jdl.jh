@@ -40,7 +40,6 @@ application {
 }
 
 entity UserRegistry {
-	id Long,
     name String,
     username String required unique minlength(5),
     password String required minlength(5),
@@ -51,31 +50,29 @@ entity UserRegistry {
 }
 
 entity AccountT {
-	id Long,
-    name String,
+    name String required unique,
     description String,
-    code Integer,
-    increaseWhen String,
-    decreaseWhen String,
-    balance Integer,
+    code Integer unique,
+    increaseWhen TransactionType,
+    decreaseWhen TransactionType,
+    balance Integer required,
 	audit Long  
 }
 
 entity Transaction {
-	id Long,
     concept String,
     accountT Long,
     type TransactionType,
     value Integer,
     date ZonedDateTime,
     balance Integer,
-	audit Long
+	audit Long required
 }
 
 entity AuditRegistry {
-    state State,
-    createdBy Long,
-    createdDate ZonedDateTime,
+    state State required,
+    createdBy Long required,
+    createdDate ZonedDateTime required,
     lastModifiedBy Long,
     lastModifiedDate ZonedDateTime
 }
