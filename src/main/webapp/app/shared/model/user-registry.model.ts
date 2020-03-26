@@ -6,6 +6,7 @@ export interface IUserRegistry {
   title?: string;
   token?: string;
   session?: boolean;
+  auditId?: number;
 }
 
 export class UserRegistry implements IUserRegistry {
@@ -16,7 +17,8 @@ export class UserRegistry implements IUserRegistry {
     public password?: string,
     public title?: string,
     public token?: string,
-    public session?: boolean
+    public session?: boolean,
+    public auditId?: number
   ) {
     this.session = this.session || false;
   }

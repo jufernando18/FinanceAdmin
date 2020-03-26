@@ -15,12 +15,6 @@
                     <label class="form-control-label" jhiTranslate="financeAdminApp.userRegistry.name" for="field_name">Name</label>
                     <input type="text" class="form-control" name="name" id="field_name"
                            formControlName="name"/>
-                    <div *ngIf="editForm.get('name')!.invalid && (editForm.get('name')!.dirty || editForm.get('name')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('name')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
                 </div>
 
                 <div class="form-group">
@@ -83,6 +77,14 @@
                         This field is required.
                         </small>
                     </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.userRegistry.audit" for="field_audit">Audit</label>
+                    <select class="form-control" id="field_audit" name="audit" formControlName="auditId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="auditRegistryOption.id" *ngFor="let auditRegistryOption of audits; trackBy: trackById">{{ auditRegistryOption.id }}</option>
+                    </select>
                 </div>
             </div>
 

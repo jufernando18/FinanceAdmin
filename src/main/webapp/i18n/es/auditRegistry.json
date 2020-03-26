@@ -1,0 +1,28 @@
+{
+  "financeAdminApp": {
+    "auditRegistry": {
+      "home": {
+        "title": "Audit Registries",
+        "createLabel": "Crear nuevo Audit Registry",
+        "createOrEditLabel": "Crear o editar Audit Registry",
+        "notFound": "Ningún Audit Registries encontrado"
+      },
+      "created": "Un nuevo Audit Registry ha sido creado con el identificador {{ param }}",
+      "updated": "Un Audit Registry ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Audit Registry ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Audit Registry {{ id }}?"
+      },
+      "detail": {
+        "title": "Audit Registry"
+      },
+      "state": "State",
+      "createdBy": "Created By",
+      "createdDate": "Created Date",
+      "lastModifiedBy": "Last Modified By",
+      "lastModifiedDate": "Last Modified Date",
+      "createdBy": "Created By",
+      "lastModifiedBy": "Last Modified By"
+    }
+  }
+}

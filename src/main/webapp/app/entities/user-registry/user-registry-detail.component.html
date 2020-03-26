@@ -32,6 +32,12 @@
                 <dd>
                     <span>{{ userRegistry.session }}</span>
                 </dd>
+                <dt><span jhiTranslate="financeAdminApp.userRegistry.audit">Audit</span></dt>
+                <dd>
+                    <div *ngIf="userRegistry.auditId">
+                        <a [routerLink]="['/audit-registry', userRegistry.auditId, 'view']">{{ userRegistry.auditId }}</a>
+                    </div>
+                </dd>
             </dl>
 
             <button type="submit"

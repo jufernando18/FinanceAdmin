@@ -1,0 +1,81 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-transaction-heading" jhiTranslate="financeAdminApp.transaction.home.createOrEditLabel">Create or edit a Transaction</h2>
+
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.concept" for="field_concept">Concept</label>
+                    <input type="text" class="form-control" name="concept" id="field_concept"
+                           formControlName="concept"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.accountT" for="field_accountT">Account T</label>
+                    <input type="number" class="form-control" name="accountT" id="field_accountT"
+                           formControlName="accountT"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.type" for="field_type">Type</label>
+                    <select class="form-control" name="type" formControlName="type" id="field_type">
+                        <option value="DEBIT">{{ 'financeAdminApp.TransactionType.DEBIT' | translate }}</option>
+                        <option value="CREDIT">{{ 'financeAdminApp.TransactionType.CREDIT' | translate }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.value" for="field_value">Value</label>
+                    <input type="number" class="form-control" name="value" id="field_value"
+                           formControlName="value"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.date" for="field_date">Date</label>
+                    <div class="d-flex">
+                        <input id="field_date" type="datetime-local" class="form-control" name="date" formControlName="date" placeholder="YYYY-MM-DD HH:mm"/>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.balance" for="field_balance">Balance</label>
+                    <input type="number" class="form-control" name="balance" id="field_balance"
+                           formControlName="balance"/>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.audit" for="field_audit">Audit</label>
+                    <select class="form-control" id="field_audit" name="audit" formControlName="auditId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="auditRegistryOption.id" *ngFor="let auditRegistryOption of audits; trackBy: trackById">{{ auditRegistryOption.id }}</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="financeAdminApp.transaction.accountT" for="field_accountT">Account T</label>
+                    <select class="form-control" id="field_accountT" name="accountT" formControlName="accountTId">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="accountTOption.id" *ngFor="let accountTOption of accountts; trackBy: trackById">{{ accountTOption.id }}</option>
+                    </select>
+                </div>
+            </div>
+
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

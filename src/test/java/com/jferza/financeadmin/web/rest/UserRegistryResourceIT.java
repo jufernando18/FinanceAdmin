@@ -179,25 +179,6 @@ public class UserRegistryResourceIT {
 
     @Test
     @Transactional
-    public void checkNameIsRequired() throws Exception {
-        int databaseSizeBeforeTest = userRegistryRepository.findAll().size();
-        // set the field null
-        userRegistry.setName(null);
-
-        // Create the UserRegistry, which fails.
-        UserRegistryDTO userRegistryDTO = userRegistryMapper.toDto(userRegistry);
-
-        restUserRegistryMockMvc.perform(post("/api/user-registries")
-            .contentType(TestUtil.APPLICATION_JSON)
-            .content(TestUtil.convertObjectToJsonBytes(userRegistryDTO)))
-            .andExpect(status().isBadRequest());
-
-        List<UserRegistry> userRegistryList = userRegistryRepository.findAll();
-        assertThat(userRegistryList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void checkUsernameIsRequired() throws Exception {
         int databaseSizeBeforeTest = userRegistryRepository.findAll().size();
         // set the field null

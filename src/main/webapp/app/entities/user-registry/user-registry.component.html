@@ -29,6 +29,7 @@
                     <th scope="col"  jhiSortBy="title"><span jhiTranslate="financeAdminApp.userRegistry.title">Title</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="token"><span jhiTranslate="financeAdminApp.userRegistry.token">Token</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"  jhiSortBy="session"><span jhiTranslate="financeAdminApp.userRegistry.session">Session</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="auditId"><span jhiTranslate="financeAdminApp.userRegistry.audit">Audit</span> <fa-icon icon="sort"></fa-icon></th>
                     <th scope="col"></th>
                 </tr>
             </thead>
@@ -41,6 +42,11 @@
                     <td>{{ userRegistry.title }}</td>
                     <td>{{ userRegistry.token }}</td>
                     <td>{{ userRegistry.session }}</td>
+                    <td>
+                        <div *ngIf="userRegistry.auditId">
+                            <a [routerLink]="['/audit-registry', userRegistry.auditId , 'view']" >{{ userRegistry.auditId }}</a>
+                        </div>
+                    </td>
                     <td class="text-right">
                         <div class="btn-group">
                             <button type="submit"

@@ -46,7 +46,6 @@ entity UserRegistry {
     title String,
     token String required unique,
     session Boolean required,
-	audit Long
 }
 
 entity AccountT {
@@ -56,7 +55,6 @@ entity AccountT {
     increaseWhen TransactionType,
     decreaseWhen TransactionType,
     balance Integer required,
-	audit Long  
 }
 
 entity Transaction {
@@ -66,7 +64,6 @@ entity Transaction {
     value Integer,
     date ZonedDateTime,
     balance Integer,
-	audit Long
 }
 
 entity AuditRegistry {

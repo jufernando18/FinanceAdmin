@@ -4,9 +4,12 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 import { IUserRegistry, UserRegistry } from 'app/shared/model/user-registry.model';
 import { UserRegistryService } from './user-registry.service';
+import { IAuditRegistry } from 'app/shared/model/audit-registry.model';
+import { AuditRegistryService } from 'app/entities/audit-registry/audit-registry.service';
 
 @Component({
   selector: 'jhi-user-registry-update',
@@ -14,22 +17,51 @@ import { UserRegistryService } from './user-registry.service';
 })
 export class UserRegistryUpdateComponent implements OnInit {
   isSaving = false;
+  audits: IAuditRegistry[] = [];
 
   editForm = this.fb.group({
     id: [],
-    name: [null, [Validators.required]],
+    name: [],
     username: [null, [Validators.required, Validators.minLength(5)]],
     password: [null, [Validators.required, Validators.minLength(5)]],
     title: [],
     token: [null, [Validators.required]],
-    session: [null, [Validators.required]]
+    session: [null, [Validators.required]],
+    auditId: []
   });
 
-  constructor(protected userRegistryService: UserRegistryService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected userRegistryService: UserRegistryService,
+    protected auditRegistryService: AuditRegistryService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ userRegistry }) => {
       this.updateForm(userRegistry);
+
+      this.auditRegistryService
+        .query({ filter: 'userregistry-is-null' })
+        .pipe(
+          map((res: HttpResponse<IAuditRegistry[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: IAuditRegistry[]) => {
+          if (!userRegistry.auditId) {
+            this.audits = resBody;
+          } else {
+            this.auditRegistryService
+              .find(userRegistry.auditId)
+              .pipe(
+                map((subRes: HttpResponse<IAuditRegistry>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: IAuditRegistry[]) => (this.audits = concatRes));
+          }
+        });
     });
   }
 
@@ -41,7 +73,8 @@ export class UserRegistryUpdateComponent implements OnInit {
       password: userRegistry.password,
       title: userRegistry.title,
       token: userRegistry.token,
-      session: userRegistry.session
+      session: userRegistry.session,
+      auditId: userRegistry.auditId
     });
   }
 
@@ -68,7 +101,8 @@ export class UserRegistryUpdateComponent implements OnInit {
       password: this.editForm.get(['password'])!.value,
       title: this.editForm.get(['title'])!.value,
       token: this.editForm.get(['token'])!.value,
-      session: this.editForm.get(['session'])!.value
+      session: this.editForm.get(['session'])!.value,
+      auditId: this.editForm.get(['auditId'])!.value
     };
   }
 
@@ -86,5 +120,9 @@ export class UserRegistryUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  trackById(index: number, item: IAuditRegistry): any {
+    return item.id;
   }
 }

@@ -1,0 +1,28 @@
+{
+  "financeAdminApp": {
+    "accountT": {
+      "home": {
+        "title": "Account TS",
+        "createLabel": "Crear nuevo Account T",
+        "createOrEditLabel": "Crear o editar Account T",
+        "notFound": "Ningún Account TS encontrado"
+      },
+      "created": "Un nuevo Account T ha sido creado con el identificador {{ param }}",
+      "updated": "Un Account T ha sido actualizado con el identificador {{ param }}",
+      "deleted": "Un Account T ha sido eliminado con el identificador {{ param }}",
+      "delete": {
+        "question": "¿Seguro que quiere eliminar Account T {{ id }}?"
+      },
+      "detail": {
+        "title": "Account T"
+      },
+      "name": "Name",
+      "description": "Description",
+      "code": "Code",
+      "increaseWhen": "Increase When",
+      "decreaseWhen": "Decrease When",
+      "balance": "Balance",
+      "audit": "Audit"
+    }
+  }
+}

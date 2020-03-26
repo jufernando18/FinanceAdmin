@@ -8,6 +8,9 @@
       "entities": {
         "main": "Entidades",
         "userRegistry": "User Registry",
+        "accountT": "Account T",
+        "transaction": "Transaction",
+        "auditRegistry": "Audit Registry",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

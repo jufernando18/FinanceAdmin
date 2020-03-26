@@ -1,0 +1,11 @@
+{
+  "financeAdminApp": {
+    "State": {
+      "null": "",
+      "ADDED": "ADDED",
+      "MODIFIED": "MODIFIED",
+      "DELETED": "DELETED",
+      "ACTIVE": "ACTIVE"
+    }
+  }
+}

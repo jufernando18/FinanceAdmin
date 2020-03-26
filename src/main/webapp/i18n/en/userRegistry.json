@@ -21,7 +21,8 @@
       "password": "Password",
       "title": "Title",
       "token": "Token",
-      "session": "Session"
+      "session": "Session",
+      "audit": "Audit"
     }
   }
 }

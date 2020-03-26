@@ -1,0 +1,62 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="transaction">
+            <h2><span jhiTranslate="financeAdminApp.transaction.detail.title">Transaction</span> {{ transaction.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="financeAdminApp.transaction.concept">Concept</span></dt>
+                <dd>
+                    <span>{{ transaction.concept }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.accountT">Account T</span></dt>
+                <dd>
+                    <span>{{ transaction.accountT }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.type">Type</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'financeAdminApp.TransactionType.' + transaction.type }}">{{ transaction.type }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.value">Value</span></dt>
+                <dd>
+                    <span>{{ transaction.value }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.date">Date</span></dt>
+                <dd>
+                    <span>{{ transaction.date }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.balance">Balance</span></dt>
+                <dd>
+                    <span>{{ transaction.balance }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.audit">Audit</span></dt>
+                <dd>
+                    <div *ngIf="transaction.auditId">
+                        <a [routerLink]="['/audit-registry', transaction.auditId, 'view']">{{ transaction.auditId }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.transaction.accountT">Account T</span></dt>
+                <dd>
+                    <div *ngIf="transaction.accountTId">
+                        <a [routerLink]="['/account-t', transaction.accountTId, 'view']">{{ transaction.accountTId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/transaction', transaction.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

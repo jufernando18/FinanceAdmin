@@ -11,7 +11,6 @@ public class UserRegistryDTO implements Serializable {
 
     private Long id;
 
-    @NotNull
     private String name;
 
     @NotNull
@@ -30,6 +29,8 @@ public class UserRegistryDTO implements Serializable {
     @NotNull
     private Boolean session;
 
+
+    private Long auditId;
 
     public Long getId() {
         return id;
@@ -87,6 +88,14 @@ public class UserRegistryDTO implements Serializable {
         this.session = session;
     }
 
+    public Long getAuditId() {
+        return auditId;
+    }
+
+    public void setAuditId(Long auditRegistryId) {
+        this.auditId = auditRegistryId;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -118,6 +127,7 @@ public class UserRegistryDTO implements Serializable {
             ", title='" + getTitle() + "'" +
             ", token='" + getToken() + "'" +
             ", session='" + isSession() + "'" +
+            ", auditId=" + getAuditId() +
             "}";
     }
 }

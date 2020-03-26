@@ -1,0 +1,9 @@
+{
+  "financeAdminApp": {
+    "TransactionType": {
+      "null": "",
+      "DEBIT": "DEBIT",
+      "CREDIT": "CREDIT"
+    }
+  }
+}

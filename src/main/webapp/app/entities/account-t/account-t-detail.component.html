@@ -1,0 +1,56 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="accountT">
+            <h2><span jhiTranslate="financeAdminApp.accountT.detail.title">Account T</span> {{ accountT.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="financeAdminApp.accountT.name">Name</span></dt>
+                <dd>
+                    <span>{{ accountT.name }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.accountT.description">Description</span></dt>
+                <dd>
+                    <span>{{ accountT.description }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.accountT.code">Code</span></dt>
+                <dd>
+                    <span>{{ accountT.code }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.accountT.increaseWhen">Increase When</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'financeAdminApp.TransactionType.' + accountT.increaseWhen }}">{{ accountT.increaseWhen }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.accountT.decreaseWhen">Decrease When</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'financeAdminApp.TransactionType.' + accountT.decreaseWhen }}">{{ accountT.decreaseWhen }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.accountT.balance">Balance</span></dt>
+                <dd>
+                    <span>{{ accountT.balance }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.accountT.audit">Audit</span></dt>
+                <dd>
+                    <div *ngIf="accountT.auditId">
+                        <a [routerLink]="['/audit-registry', accountT.auditId, 'view']">{{ accountT.auditId }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/account-t', accountT.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,63 @@
+{
+    "name": "AccountT",
+    "fields": [
+        {
+            "fieldName": "name",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "code",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "increaseWhen",
+            "fieldType": "TransactionType",
+            "fieldValues": "DEBIT,CREDIT"
+        },
+        {
+            "fieldName": "decreaseWhen",
+            "fieldType": "TransactionType",
+            "fieldValues": "DEBIT,CREDIT"
+        },
+        {
+            "fieldName": "balance",
+            "fieldType": "Integer",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "auditRegistry",
+            "otherEntityRelationshipName": "accountT",
+            "relationshipName": "audit",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200326050839",
+    "entityTableName": "account_t",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": [
+        "FinanceAdmin"
+    ]
+}

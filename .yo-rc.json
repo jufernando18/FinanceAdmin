@@ -29,7 +29,7 @@
     "clientFramework": "angularX",
     "clientTheme": "none",
     "clientThemeVariant": "",
-    "creationTimestamp": 1583039902974,
+    "creationTimestamp": 1585199160801,
     "testFrameworks": [],
     "jhiPrefix": "jhi",
     "entitySuffix": "",
@@ -38,6 +38,10 @@
     "enableTranslation": true,
     "nativeLanguage": "en",
     "languages": ["en", "es"],
-    "blueprints": []
-  }
+    "blueprints": [],
+    "skipClient": false,
+    "skipServer": false,
+    "skipUserManagement": false
+  },
+  "entities": ["UserRegistry", "AccountT", "Transaction", "AuditRegistry"]
 }

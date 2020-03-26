@@ -4,12 +4,14 @@ package com.jferza.financeadmin.domain;
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
+import java.io.Serializable;
+
 /**
  * A UserRegistry.
  */
 @Entity
 @Table(name = "user_registry")
-public class UserRegistry  extends AbstractAuditingEntity {
+public class UserRegistry implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -17,8 +19,7 @@ public class UserRegistry  extends AbstractAuditingEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
-    @Column(name = "name", nullable = false)
+    @Column(name = "name")
     private String name;
 
     @NotNull
@@ -41,6 +42,10 @@ public class UserRegistry  extends AbstractAuditingEntity {
     @NotNull
     @Column(name = "session", nullable = false)
     private Boolean session;
+
+    @OneToOne
+    @JoinColumn(unique = true)
+    private AuditRegistry audit;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -127,6 +132,19 @@ public class UserRegistry  extends AbstractAuditingEntity {
 
     public void setSession(Boolean session) {
         this.session = session;
+    }
+
+    public AuditRegistry getAudit() {
+        return audit;
+    }
+
+    public UserRegistry audit(AuditRegistry auditRegistry) {
+        this.audit = auditRegistry;
+        return this;
+    }
+
+    public void setAudit(AuditRegistry auditRegistry) {
+        this.audit = auditRegistry;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

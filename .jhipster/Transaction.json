@@ -1,0 +1,59 @@
+{
+    "name": "Transaction",
+    "fields": [
+        {
+            "fieldName": "concept",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "accountT",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "type",
+            "fieldType": "TransactionType",
+            "fieldValues": "DEBIT,CREDIT"
+        },
+        {
+            "fieldName": "value",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "date",
+            "fieldType": "ZonedDateTime"
+        },
+        {
+            "fieldName": "balance",
+            "fieldType": "Integer"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "auditRegistry",
+            "otherEntityRelationshipName": "transaction",
+            "relationshipName": "audit",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "accountT",
+            "otherEntityRelationshipName": "transaction",
+            "relationshipName": "accountT",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200326050939",
+    "entityTableName": "transaction",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": [
+        "FinanceAdmin"
+    ]
+}

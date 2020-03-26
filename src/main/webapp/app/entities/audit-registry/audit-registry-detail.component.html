@@ -1,0 +1,58 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="auditRegistry">
+            <h2><span jhiTranslate="financeAdminApp.auditRegistry.detail.title">Audit Registry</span> {{ auditRegistry.id }}</h2>
+
+            <hr>
+
+            <jhi-alert-error></jhi-alert-error>
+
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.state">State</span></dt>
+                <dd>
+                    <span jhiTranslate="{{ 'financeAdminApp.State.' + auditRegistry.state }}">{{ auditRegistry.state }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.createdBy">Created By</span></dt>
+                <dd>
+                    <span>{{ auditRegistry.createdBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.createdDate">Created Date</span></dt>
+                <dd>
+                    <span>{{ auditRegistry.createdDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <span>{{ auditRegistry.lastModifiedBy }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.lastModifiedDate">Last Modified Date</span></dt>
+                <dd>
+                    <span>{{ auditRegistry.lastModifiedDate }}</span>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.createdBy">Created By</span></dt>
+                <dd>
+                    <div *ngIf="auditRegistry.createdById">
+                        <a [routerLink]="['/user-registry', auditRegistry.createdById, 'view']">{{ auditRegistry.createdById }}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="financeAdminApp.auditRegistry.lastModifiedBy">Last Modified By</span></dt>
+                <dd>
+                    <div *ngIf="auditRegistry.lastModifiedById">
+                        <a [routerLink]="['/user-registry', auditRegistry.lastModifiedById, 'view']">{{ auditRegistry.lastModifiedById }}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/audit-registry', auditRegistry.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

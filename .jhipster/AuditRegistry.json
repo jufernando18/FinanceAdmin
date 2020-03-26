@@ -1,0 +1,63 @@
+{
+    "name": "AuditRegistry",
+    "fields": [
+        {
+            "fieldName": "state",
+            "fieldType": "State",
+            "fieldValues": "ADDED,MODIFIED,DELETED,ACTIVE",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdBy",
+            "fieldType": "Long",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "createdDate",
+            "fieldType": "ZonedDateTime",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "lastModifiedBy",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "lastModifiedDate",
+            "fieldType": "ZonedDateTime"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userRegistry",
+            "otherEntityRelationshipName": "auditRegistry",
+            "relationshipName": "createdBy",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "userRegistry",
+            "otherEntityRelationshipName": "auditRegistry",
+            "relationshipName": "lastModifiedBy",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200326051039",
+    "entityTableName": "audit_registry",
+    "dto": "mapstruct",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": [
+        "FinanceAdmin"
+    ]
+}
