@@ -30,13 +30,13 @@ application {
     clientPackageManager npm
     clientFramework angularX
     clientTheme none
-    creationTimestamp 1583039902974
+    creationTimestamp 1585198080084
     dtoSuffix DTO
     otherModules []
     skipUserManagement false
   }
 
-  entities UserRegistry, AccountT, Transaction, Audit
+  entities UserRegistry, AccountT, Transaction, AuditRegistry
 }
 
 entity UserRegistry {
