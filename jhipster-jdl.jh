@@ -66,7 +66,7 @@ entity Transaction {
     value Integer,
     date ZonedDateTime,
     balance Integer,
-	audit Long required
+	audit Long
 }
 
 entity AuditRegistry {
@@ -87,8 +87,8 @@ enum State {
 
 relationship ManyToOne {
     Transaction{accountT} to AccountT,
-	Audit{createdBy} to UserRegistry,
-    Audit{lastModifiedBy} to UserRegistry    
+	AuditRegistry{createdBy} to UserRegistry,
+    AuditRegistry{lastModifiedBy} to UserRegistry    
 }
 
 relationship OneToOne {
@@ -97,6 +97,6 @@ relationship OneToOne {
     Transaction{audit} to AuditRegistry
 }
 
-dto UserRegistry, AccountT, Transaction, Audit with mapstruct
-paginate UserRegistry, AccountT, Transaction, Audit with pagination
-service UserRegistry, AccountT, Transaction, Audit with serviceImpl
+dto UserRegistry, AccountT, Transaction, AuditRegistry with mapstruct
+paginate UserRegistry, AccountT, Transaction, AuditRegistry with pagination
+service UserRegistry, AccountT, Transaction, AuditRegistry with serviceImpl
