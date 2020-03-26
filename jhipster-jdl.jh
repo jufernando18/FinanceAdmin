@@ -1,0 +1,62 @@
+entity UserRegistry {
+	id Long,
+    name String,
+    username String,
+    password String,
+    title String,
+    token String,
+    session Boolean,
+	audit Long
+}
+
+entity AccountT {
+	id Long,
+    name String,
+    description String,
+    code Integer,
+    increaseWhen String,
+    decreaseWhen String,
+    balance Integer,
+	audit Long  
+}
+
+entity Transaction {
+	id Long,
+    concept String,
+    accountT Long,
+    type String,
+    value Integer,
+    date ZonedDateTime,
+    balance Integer,
+	audit Long
+}
+
+entity Audit {
+    state String,
+    createdBy Long,
+    createdDate ZonedDateTime,
+    lastModifiedBy Long,
+    lastModifiedDate ZonedDateTime
+}
+
+enum TransactionType {
+	DEBIT, CREDIT
+}
+
+enum State {
+	ADDED, MODIFIED, DELETED, ACTIVE
+}
+
+relationship ManyToOne {
+	Transaction{type} to TransactionType,
+    Transaction{accountT} to AccountT,
+	Audit{state} to State,
+	Audit{createdBy} to UserRegistry,
+    Audit{lastModifiedBy} to UserRegistry    
+}
+
+relationship OneToOne {
+	UserRegistry{audit} to Audit,
+    AccountT{audit} to Audit,
+    Transaction{audit} to Audit
+}
