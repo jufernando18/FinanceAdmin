@@ -1,11 +1,52 @@
+application {
+  config {
+    databaseType sql
+    devDatabaseType h2Disk
+    enableHibernateCache false
+    enableSwaggerCodegen true
+    enableTranslation true
+    jhiPrefix jhi
+    languages [en, es]
+    messageBroker kafka
+    nativeLanguage en
+    packageName com.jferza.financeadmin
+    prodDatabaseType mysql
+    searchEngine false
+    serviceDiscoveryType eureka
+    skipClient false
+    skipServer false
+    testFrameworks []
+    websocket false
+    jhipsterVersion "6.7.1"
+    applicationType monolith
+    baseName FinanceAdmin
+    serverPort 8080
+    authenticationType jwt
+    cacheProvider ehcache
+    buildTool maven
+    jwtSecretKey "ZWNlMDcxY2ZhOWQyZDUyNzhmODg0ZTMwODkxYjQ5NDg5MzRmOGZhNTBlNDRjMTU0NjUzOGE0YjhkMmQwYjM2NzdiZDViNTNiODdjYjRlMzRiNTc2MzRhOGZkZDljMjA4N2Y0ZGIxMWJmZTRhM2VhYjJlMTNkNTY5ZDkxNjBiY2I="
+    embeddableLaunchScript false
+    useSass true
+    clientPackageManager npm
+    clientFramework angularX
+    clientTheme none
+    creationTimestamp 1583039902974
+    dtoSuffix DTO
+    otherModules []
+    skipUserManagement false
+  }
+
+  entities UserRegistry, AccountT, Transaction, Audit
+}
+
 entity UserRegistry {
 	id Long,
     name String,
-    username String,
-    password String,
+    username String required unique minlength(5),
+    password String required minlength(5),
     title String,
-    token String,
-    session Boolean,
+    token String required unique,
+    session Boolean required,
 	audit Long
 }
 
@@ -24,15 +65,15 @@ entity Transaction {
 	id Long,
     concept String,
     accountT Long,
-    type String,
+    type TransactionType,
     value Integer,
     date ZonedDateTime,
     balance Integer,
 	audit Long
 }
 
-entity Audit {
-    state String,
+entity AuditRegistry {
+    state State,
     createdBy Long,
     createdDate ZonedDateTime,
     lastModifiedBy Long,
@@ -48,15 +89,17 @@ enum State {
 }
 
 relationship ManyToOne {
-	Transaction{type} to TransactionType,
     Transaction{accountT} to AccountT,
-	Audit{state} to State,
 	Audit{createdBy} to UserRegistry,
     Audit{lastModifiedBy} to UserRegistry    
 }
 
 relationship OneToOne {
-	UserRegistry{audit} to Audit,
-    AccountT{audit} to Audit,
-    Transaction{audit} to Audit
+	UserRegistry{audit} to AuditRegistry,
+    AccountT{audit} to AuditRegistry,
+    Transaction{audit} to AuditRegistry
 }
+
+dto UserRegistry, AccountT, Transaction, Audit with mapstruct
+paginate UserRegistry, AccountT, Transaction, Audit with pagination
+service UserRegistry, AccountT, Transaction, Audit with serviceImpl
